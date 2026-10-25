@@ -121,5 +121,6 @@
     $('#openSurvey').onclick=()=>showView('survey');$$('[data-back]').forEach(a=>a.onclick=()=>showView('dashboard'));$$('.nav button').forEach(b=>b.onclick=()=>showView(b.dataset.view));$('#menuBtn').onclick=()=>$('#sidebar').classList.toggle('open');$('#today').textContent=new Date().toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'});$('#profileBtn').onclick=()=>{$('#profileInput').value=currentUser.name||'';$('#profileModal').classList.add('open')};$('#profileForm').onsubmit=e=>{e.preventDefault();setCurrentUser($('#profileInput').value);render();$('#profileModal').classList.remove('open');toast('Guest name saved on this device')};$('#voterName').addEventListener('change',e=>setCurrentUser(e.target.value));$('#name').addEventListener('change',e=>setCurrentUser(e.target.value));$('#pollCreator').addEventListener('change',e=>setCurrentUser(e.target.value));
     if(currentUser.name)setCurrentUser(currentUser.name);initialize();
   </script>
+  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </body>
 </html>
