@@ -5,15 +5,20 @@ A responsive food-poll and meal-feedback app. Vercel serves the static site and 
 ## Deploy to Vercel
 
 1. Push this project to a Git repository and import it in Vercel.
-2. Add a Neon Postgres database through the Vercel Marketplace (or use an existing Neon project).
-3. Set `DATABASE_URL` in the Vercel project settings to the database's pooled connection string. Do not expose it in browser code or commit it.
-4. Deploy. The API creates its tables on the first request. `db/schema.sql` contains the equivalent schema for manual setup.
+2. In the Vercel Marketplace, add Neon Postgres and connect it to the same Vercel project, or use an existing Neon project.
+3. In the Vercel project settings, confirm the environment variable is named exactly `DATABASE_URL` and contains the Neon Postgres connection string. Make sure it is enabled for **Production**; also enable **Preview** and **Development** if you use those environments. Do not use the `NEXT_PUBLIC_` prefix, expose the value in browser code, or commit it.
+4. Deploy or redeploy after connecting the database or changing the environment variable. Vercel only makes new environment variable values available to new deployments.
+5. Verify the production API at `https://your-site.vercel.app/api/polls`. A new database should return `[]`. `https://your-site.vercel.app/api/responses` should return `{"count":0}`. The API creates its tables on the first request; `db/schema.sql` contains the equivalent schema for manual setup.
+
+If the app says it cannot connect to `DATABASE_URL`, check that the variable exists in the correct Vercel project and environment, then redeploy. If the API still returns an error, inspect the Vercel Function logs for the request.
+
+The example polls are only shown when opening the HTML file directly with a `file://` URL. A deployed app does not use those examples; it loads the saved polls from Neon.
 
 No build command is needed; `index.html` is served as a static file and files in `api/` are deployed as Vercel Functions.
 
 ## Local development
 
-Install dependencies with `npm install`, then run `npx vercel dev`. Configure `DATABASE_URL` in `.env.local` to use the shared backend. When opened directly as a `file://` URL, the page uses browser-local storage as a visual/local prototype; use the Vercel dev server for API-backed behavior.
+Use Node.js 22.12 or newer. Install dependencies with `npm install`, then run `npx vercel dev` (there is intentionally no `npm run dev` script because it recursively invokes the Vercel CLI). Configure `DATABASE_URL` in `.env.local` to use the shared backend. When opened directly as a `file://` URL, the page uses browser-local storage as a visual/local prototype; use the Vercel dev server for API-backed behavior.
 
 ## API
 
