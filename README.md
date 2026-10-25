@@ -6,11 +6,11 @@ A responsive food-poll and meal-feedback app. Vercel serves the static site and 
 
 1. Push this project to a Git repository and import it in Vercel.
 2. In the Vercel Marketplace, add Neon Postgres and connect it to the same Vercel project, or use an existing Neon project.
-3. In the Vercel project settings, confirm the environment variable is named exactly `DATABASE_URL` and contains the Neon Postgres connection string. Make sure it is enabled for **Production**; also enable **Preview** and **Development** if you use those environments. Do not use the `NEXT_PUBLIC_` prefix, expose the value in browser code, or commit it.
+3. In the Vercel project settings, make sure a Postgres connection variable is enabled for **Production**; also enable **Preview** and **Development** if you use those environments. The API accepts `DATABASE_URL`, `FOOD_ACQUISITION_DB_POSTGRES_URL`, `FOOD_ACQUISITION_DB_POSTGRES_PRISMA_URL`, `FOOD_ACQUISITION_DB_POSTGRES_URL_NON_POOLING`, `POSTGRES_URL`, `POSTGRES_PRISMA_URL`, or `POSTGRES_URL_NON_POOLING`. For your Neon integration, `FOOD_ACQUISITION_DB_POSTGRES_URL` is supported directly. Do not use the `NEXT_PUBLIC_` prefix, expose the value in browser code, or commit it.
 4. Deploy or redeploy after connecting the database or changing the environment variable. Vercel only makes new environment variable values available to new deployments.
 5. Verify the production API at `https://your-site.vercel.app/api/polls`. A new database should return `[]`. `https://your-site.vercel.app/api/responses` should return `{"count":0}`. The API creates its tables on the first request; `db/schema.sql` contains the equivalent schema for manual setup.
 
-If the app says it cannot connect to `DATABASE_URL`, check that the variable exists in the correct Vercel project and environment, then redeploy. If the API still returns an error, inspect the Vercel Function logs for the request.
+If the app says it cannot connect to the database, check that one of the supported variables exists in the correct Vercel project and environment, then redeploy. If the API still returns an error, inspect the Vercel Function logs for the request.
 
 The example polls are only shown when opening the HTML file directly with a `file://` URL. A deployed app does not use those examples; it loads the saved polls from Neon.
 

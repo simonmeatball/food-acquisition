@@ -3,12 +3,19 @@ import { neon } from '@neondatabase/serverless';
 let schemaReady;
 
 export function database() {
-  if (!process.env.DATABASE_URL) {
-    const error = new Error('DATABASE_URL is not configured.');
+  const connectionString = process.env.DATABASE_URL ||
+    process.env.FOOD_ACQUISITION_DB_POSTGRES_URL ||
+    process.env.FOOD_ACQUISITION_DB_POSTGRES_PRISMA_URL ||
+    process.env.FOOD_ACQUISITION_DB_POSTGRES_URL_NON_POOLING ||
+    process.env.POSTGRES_URL ||
+    process.env.POSTGRES_PRISMA_URL ||
+    process.env.POSTGRES_URL_NON_POOLING;
+  if (!connectionString) {
+    const error = new Error('Set DATABASE_URL or a supported Postgres connection variable.');
     error.statusCode = 503;
     throw error;
   }
-  return neon(process.env.DATABASE_URL);
+  return neon(connectionString);
 }
 
 export async function ensureSchema(sql) {
