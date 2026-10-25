@@ -3,13 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "scripts": {
-    "dev": "vercel dev"
-  },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0"
   },
   "devDependencies": {
-    "vercel": "^59.16.0"
+    "vercel": "^53.2.0"
   }
 }

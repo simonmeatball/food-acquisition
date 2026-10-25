@@ -13,7 +13,7 @@ No build command is needed; `index.html` is served as a static file and files in
 
 ## Local development
 
-Install dependencies with `npm install`, then run `npm run dev`. Configure `DATABASE_URL` in `.env.local` to use the shared backend. When opened directly as a `file://` URL, the page uses browser-local storage as a visual/local prototype; use the Vercel dev server for API-backed behavior.
+Install dependencies with `npm install`, then run `npx vercel dev`. Configure `DATABASE_URL` in `.env.local` to use the shared backend. When opened directly as a `file://` URL, the page uses browser-local storage as a visual/local prototype; use the Vercel dev server for API-backed behavior.
 
 ## API
 
