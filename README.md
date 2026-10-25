@@ -1,6 +1,6 @@
 # FAQ - Food Acquisition
 
-A responsive food-poll and meal-feedback app. Vercel serves the static site and its `/api` serverless functions; Neon provides shared Postgres storage, so polls, named votes, meals, reviews, and statistics are available across devices.
+A responsive food-poll and meal-feedback app. Vercel serves the static site and its `/api` serverless functions; Neon provides shared Postgres storage, so polls, named votes, guest profiles, meals, reviews, and statistics are available across devices.
 
 ## Deploy to Vercel
 
@@ -23,7 +23,7 @@ Use Node.js 22.12 or newer. Install dependencies with `npm install`, then run `n
 ## API
 
 - `GET /api/polls`, `POST /api/polls`
-- `GET /api/poll?id=...`, `PATCH /api/poll?id=...`
+- `GET /api/poll?id=...`, `PATCH /api/poll?id=...`, `DELETE /api/poll?id=...`
 - `POST /api/vote?id=...`
 - `GET /api/meals`, `POST /api/meals`
 - `GET /api/responses`, `POST /api/responses`
@@ -33,6 +33,12 @@ Use Node.js 22.12 or newer. Install dependencies with `npm install`, then run `n
 
 Voters must enter a name. A name can vote once per poll, and the poll view shows who has voted. To see who has not voted yet, add the expected names as a comma-separated list when creating the poll; without a list of expected voters the app can only show submitted voters.
 
+The app keeps the current guest name in browser local storage and pre-fills it on that device. The server groups names by a normalized key (case-insensitive, with extra spaces collapsed), so entering the same name on another device links poll votes, poll authorship, and meal feedback to the same guest profile. Polls record their creator; edit, close/reopen, and delete controls are shown to the matching creator name.
+
+Polls created before creator tracking was added have no recorded owner, so their existing votes remain visible but owner controls are unavailable for those older polls.
+
 Meal feedback must be attached to a meal record. Create a meal directly from the feedback page, or open a poll and create a meal linked to that poll. The Statistics page groups feedback by person and meal, including meals attended, the sum of the 1–10 intake scores, spending, and average food ratings. The intake score is a self-reported scale, not a measured calorie count.
 
 The public poll, voting, meal creation, and feedback endpoints accept submissions without an account, as intended for event guests. Add authentication or rate limiting before using the app for sensitive data or a high-traffic public event.
+
+Because guest profiles are name-based and have no authentication, they are convenient attribution rather than verified identities. Anyone who enters the same name can appear as that guest and can use that name to manage its polls. Do not treat poll ownership as a security boundary.
