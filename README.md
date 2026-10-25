@@ -10,6 +10,12 @@ A responsive food-poll and meal-feedback app. Vercel serves the static site and 
 4. Deploy or redeploy after connecting the database or changing the environment variable. Vercel only makes new environment variable values available to new deployments.
 5. Verify the production API at `https://your-site.vercel.app/api/polls`. A new database should return `[]`. `https://your-site.vercel.app/api/responses` should return `{"count":0}`. The API creates and migrates its tables on the first request; `db/schema.sql` contains the equivalent schema for manual setup.
 
+### Admin console
+
+The database management console is available at `https://your-site.vercel.app/admin`. Set both `ADMIN_PASSWORD` and `ADMIN_SESSION_SECRET` in the Vercel project environment variables, then redeploy. Use a unique, long password; generate the session secret with `openssl rand -base64 48`. Keep both values private and out of Git. The console uses a signed, HTTP-only session cookie that expires after 12 hours.
+
+The console can edit and delete people, meals, meal feedback, polls, and individual votes. Deleting a meal also deletes its feedback. Deleting a person removes their feedback, votes, and polls they created. Admin edits are permanent database changes.
+
 If the app says it cannot connect to the database, check that one of the supported variables exists in the correct Vercel project and environment, then redeploy. If the API still returns an error, inspect the Vercel Function logs for the request.
 
 The example polls are only shown when opening the HTML file directly with a `file://` URL. A deployed app does not use those examples; it loads the saved polls from Neon.
@@ -28,6 +34,7 @@ Use Node.js 22.12 or newer. Install dependencies with `npm install`, then run `n
 - `GET /api/meals`, `POST /api/meals`
 - `GET /api/responses`, `POST /api/responses`
 - `GET /api/stats`
+- `POST`, `GET`, and `DELETE /api/admin/auth`; `GET /api/admin/data`; `PATCH` and `DELETE /api/admin/record` (admin session required)
 
 ## Polls, meals, and statistics
 
@@ -37,7 +44,7 @@ The app keeps the current guest name in browser local storage and pre-fills it o
 
 Polls created before creator tracking was added have no recorded owner, so their existing votes remain visible but owner controls are unavailable for those older polls.
 
-Meal feedback must be attached to a meal record. Create a meal directly from the feedback page, or open a poll and create a meal linked to that poll. The Statistics page groups feedback by person and meal, including meals attended, the sum of the 1–10 intake scores, spending, and average food ratings. The intake score is a self-reported scale, not a measured calorie count.
+Meal feedback must be attached to a meal record. Create a meal directly from the feedback page, or open a poll and create a meal linked to that poll. Meals and their poll or feedback links are listed on the overview page for sharing. The Statistics page groups feedback by person and meal, including meals attended, the sum of the 1–10 intake scores, personal spending, average meal spend per feedback entry, and average food ratings. The intake score is a self-reported scale, not a measured calorie count.
 
 The public poll, voting, meal creation, and feedback endpoints accept submissions without an account, as intended for event guests. Add authentication or rate limiting before using the app for sensitive data or a high-traffic public event.
 

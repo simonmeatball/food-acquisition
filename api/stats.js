@@ -39,13 +39,14 @@ export default async function handler(req, res) {
       COUNT(DISTINCT f.name)::int AS people,
       COALESCE(SUM(f.calories)::int, 0) AS calorie_score,
       COALESCE(ROUND(SUM(f.cost), 2)::float, 0) AS spend,
+      ROUND(AVG(f.cost), 2)::float AS average_spend,
       ROUND(AVG(f.rating), 1)::float AS average_rating
       FROM food_meals m LEFT JOIN meal_feedback f ON f.meal_id = m.id
       GROUP BY m.id ORDER BY m.created_at DESC`;
     return res.status(200).json({
       totals,
       people: people.map((person) => ({ ...person, spend: Number(person.spend || 0) })),
-      meals: meals.map((meal) => ({ ...meal, spend: Number(meal.spend || 0) })),
+      meals: meals.map((meal) => ({ ...meal, spend: Number(meal.spend || 0), average_spend: Number(meal.average_spend || 0) })),
     });
   } catch (error) { return sendError(res, error); }
 }

@@ -114,12 +114,20 @@ export async function listPolls(sql, id) {
           COALESCE((SELECT json_object_agg(t.option_text, t.vote_count) FROM (
             SELECT option_text, COUNT(*)::int AS vote_count FROM food_poll_votes WHERE poll_id = p.id GROUP BY option_text
           ) t), '{}'::json) AS votes,
+          COALESCE((SELECT json_object_agg(t.option_text, t.voters) FROM (
+            SELECT option_text, json_agg(COALESCE(voter_name, 'Name not recorded') ORDER BY created_at) AS voters
+            FROM food_poll_votes WHERE poll_id = p.id GROUP BY option_text
+          ) t), '{}'::json) AS votes_by_option,
           COALESCE((SELECT json_agg(DISTINCT voter_name) FROM food_poll_votes WHERE poll_id = p.id AND voter_name IS NOT NULL), '[]'::json) AS voters
         FROM food_polls p LEFT JOIN food_meals m ON m.source_poll_id = p.id LEFT JOIN food_people creator ON creator.person_key = p.created_by_key WHERE p.id = ${id}`
     : await sql`SELECT p.id, p.title, p.description, p.options, p.participants, p.created_by_key, creator.display_name AS created_by, p.active, p.created_at, m.id AS meal_id,
           COALESCE((SELECT json_object_agg(t.option_text, t.vote_count) FROM (
             SELECT option_text, COUNT(*)::int AS vote_count FROM food_poll_votes WHERE poll_id = p.id GROUP BY option_text
           ) t), '{}'::json) AS votes,
+          COALESCE((SELECT json_object_agg(t.option_text, t.voters) FROM (
+            SELECT option_text, json_agg(COALESCE(voter_name, 'Name not recorded') ORDER BY created_at) AS voters
+            FROM food_poll_votes WHERE poll_id = p.id GROUP BY option_text
+          ) t), '{}'::json) AS votes_by_option,
           COALESCE((SELECT json_agg(DISTINCT voter_name) FROM food_poll_votes WHERE poll_id = p.id AND voter_name IS NOT NULL), '[]'::json) AS voters
         FROM food_polls p LEFT JOIN food_meals m ON m.source_poll_id = p.id LEFT JOIN food_people creator ON creator.person_key = p.created_by_key ORDER BY p.created_at DESC`;
   return rows.map((row) => ({
@@ -133,6 +141,7 @@ export async function listPolls(sql, id) {
     active: row.active,
     createdAt: row.created_at,
     votes: row.votes,
+    votesByOption: row.votes_by_option || {},
     voters: row.voters || [],
     mealId: row.meal_id || null,
   }));
