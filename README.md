@@ -20,6 +20,8 @@ If the app says it cannot connect to the database, check that one of the support
 
 The example polls are only shown when opening the HTML file directly with a `file://` URL. A deployed app does not use those examples; it loads the saved polls from Neon.
 
+The sidebar routes are `/` (Overview), `/polls` (Food polls), `/feedback` (Meal feedback), and `/statistics`. Poll and meal share links open their matching screens directly, and browser Back/Forward moves between visited screens.
+
 No build command is needed; `index.html` is served as a static file and files in `api/` are deployed as Vercel Functions.
 
 ## Local development
