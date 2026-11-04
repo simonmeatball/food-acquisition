@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="400" viewBox="0 0 480 400" fill="none">
+  <defs>
+    <g id="pizza">
+      <path d="M-19-13Q0-23 19-13L1 23Z M-16-8Q0-16 16-8"/>
+      <circle cx="-5" cy="-3" r="2.5"/><circle cx="5" cy="3" r="2.5"/>
+      <path d="m-3 12 2 2m9-22 2 1"/>
+    </g>
+    <g id="burger">
+      <path d="M-22-4C-21-28 21-28 22-4Z M-22 3l7 3 8-3 8 3 8-3 9 3 5-3 M-22 12h44v4q-1 7-8 7h-28q-7 0-8-7Z M-24-3h48v6h-48Z M-23 7h46v5h-46Z"/>
+      <path d="m-9-13 2-2m7 5 2-2m8 0 2 1"/>
+    </g>
+    <g id="smoothie">
+      <path d="m-15-9 4 31h22l4-31 M-18-14h36v5h-36Z M4-14l5-16h10 M-9 2q9-5 18 0"/>
+      <path d="M-7-14q-10-2-8-10 8-3 11 4 M-12-20l6 5"/>
+    </g>
+    <g id="avocado">
+      <path d="M-7-21C-4-30 5-30 8-20c3 10 17 15 16 29-2 24-46 24-47 0-1-12 12-20 16-30Z"/>
+      <path d="M-4-17C-1-24 2-24 5-16c3 9 14 15 14 25-2 17-36 17-37 0 0-10 11-18 14-26Z"/>
+      <ellipse cy="9" rx="9" ry="10"/>
+    </g>
+    <g id="taco">
+      <path d="M-25 13Q-23-28 12-12q12 5 15 25Z M-25 13Q-11-13 10-7q12 4 17 20 M-19-5q-3-10 5-9 1-9 9-5 5-7 11-1 9-3 12 4 10 0 9 9"/>
+      <path d="m-12 5 3-2m12 4 3-1m7 5 3-2"/>
+    </g>
+    <g id="cherries">
+      <circle cx="-10" cy="13" r="10"/><circle cx="13" cy="14" r="10"/>
+      <path d="M-10 3Q0-6 3-23 M13 4Q14-10 3-23 M3-23Q21-30 23-17 12-11 3-23 M-15 11l2-2m22 3 2-2"/>
+    </g>
+    <g id="noodles">
+      <path d="M-23 1h46Q20 23 0 23T-23 1Z M-21 7h42 M-8-4q-5-5 0-10t0-10 M2-4q-5-5 0-10 M9-4l13-24 M15-4l15-23"/>
+    </g>
+    <g id="carrot">
+      <path d="M-11-9Q-14-16 0-16T11-9L1 26q-1 2-2 0Z M-2-16q-15-16-8-17 6-1 10 17 M1-16q-1-22 7-19 5 3-7 19 M3-16q13-16 16-10 1 6-16 10 M-8-4h8 M3 4h4 M-4 13h5"/>
+    </g>
+    <g id="coffee">
+      <path d="M-17-8h29v23q-1 9-14 9t-15-9Z M12-5h7q12 10-7 16 M-23 25h42 M-10-15q-5-4 0-9 M0-15q-5-4 0-9"/>
+    </g>
+    <g id="donut">
+      <circle r="22"/><circle r="7"/>
+      <path d="M-20-9q5 6 10-1t13-4 11 7 8 2 M-14 7l3 2m14 5 2-3m8-13 3 1m-19-18 2 3"/>
+    </g>
+    <g id="leaf">
+      <path d="M-16 15Q-22-11 17-20 27 15-16 15Z M-16 15 13-15 M-6 5l-2-11 M2-3l10 1"/>
+    </g>
+    <g id="fork">
+      <path d="M-5-23v14q0 6 5 6t5-6v-14 M0-23v20 M0-3v28 M20-23Q10-3 20 0v28 M20-23V0"/>
+    </g>
+  </defs>
+  <!-- Muted sage at 13% opacity keeps the pattern behind the page content. -->
+  <g stroke="#6f8967" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity=".13">
+    <use href="#pizza" transform="translate(40 42) rotate(-18)"/>
+    <use href="#leaf" transform="translate(134 38) rotate(18) scale(.75)"/>
+    <use href="#smoothie" transform="translate(229 48) rotate(13)"/>
+    <use href="#cherries" transform="translate(331 37) rotate(-15) scale(.85)"/>
+    <use href="#burger" transform="translate(431 49) rotate(12)"/>
+    <use href="#coffee" transform="translate(84 143) rotate(-12)"/>
+    <use href="#avocado" transform="translate(183 140) rotate(19) scale(.85)"/>
+    <use href="#fork" transform="translate(285 142) rotate(-20) scale(.8)"/>
+    <use href="#taco" transform="translate(386 145) rotate(-12)"/>
+    <use href="#donut" transform="translate(39 242) rotate(15) scale(.85)"/>
+    <use href="#noodles" transform="translate(136 239) rotate(-9)"/>
+    <use href="#carrot" transform="translate(238 240) rotate(28) scale(.85)"/>
+    <use href="#pizza" transform="translate(338 240) rotate(16)"/>
+    <use href="#leaf" transform="translate(438 244) rotate(-24) scale(.8)"/>
+    <use href="#cherries" transform="translate(84 340) rotate(18)"/>
+    <use href="#taco" transform="translate(184 342) rotate(12) scale(.9)"/>
+    <use href="#smoothie" transform="translate(285 341) rotate(-14) scale(.9)"/>
+    <use href="#avocado" transform="translate(386 341) rotate(-18) scale(.85)"/>
+    <path d="m81 76 3 3m95 10 3-3m99-11 3 3m102 6 3-3m-361 90 3 3m101 8 3-3m100-5 3 3m97 8 3-3m103-4 3 3m-359 92 3-3m97 8 3 3m99-5 3-3m100 8 3 3m-356 91 3-3m101 8 3 3m99-5 3-3m99 8 3 3m98-5 3-3"/>
+  </g>
+</svg>
