@@ -46,6 +46,8 @@ The app keeps the current guest name in browser local storage and pre-fills it o
 
 Polls created before creator tracking was added have no recorded owner, so their existing votes remain visible but owner controls are unavailable for those older polls.
 
+Meal costs can be entered in dollars or Erewhon smoothies ($20 per smoothie), including fractional smoothies. The survey previews the dollar equivalent and saves the cost in dollars, rounded to cents. Switching units converts the entered value.
+
 Meal feedback must be attached to a meal record. Create a meal directly from the feedback page, or open a poll and create a meal linked to that poll. Meals and their poll or feedback links are listed on the overview page for sharing. The Statistics page groups feedback by person and meal, including meals attended, the sum of the 1–10 intake scores, personal spending, average meal spend per feedback entry, and average food ratings. The intake score is a self-reported scale, not a measured calorie count.
 
 The public poll, voting, meal creation, and feedback endpoints accept submissions without an account, as intended for event guests. Add authentication or rate limiting before using the app for sensitive data or a high-traffic public event.

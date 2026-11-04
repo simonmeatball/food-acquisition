@@ -32,10 +32,17 @@ export default async function handler(req, res) {
       const [poll] = await sql`SELECT id FROM food_polls WHERE id = ${sourcePollId}`;
       if (!poll) return res.status(404).json({ error: 'The source poll was not found.' });
     }
-    const [row] = await sql`INSERT INTO food_meals (id, name, source_poll_id)
+    const [inserted] = await sql`INSERT INTO food_meals (id, name, source_poll_id)
       VALUES (${id}, ${name}, ${sourcePollId})
+      ON CONFLICT DO NOTHING
       RETURNING id, name, source_poll_id, created_at`;
-    return res.status(201).json({
+    // A retry may reuse an ID, or another request may have created the poll meal.
+    // Read after the insert so a concurrent winner is visible without changing it.
+    const row = inserted || (await sql`SELECT id, name, source_poll_id, created_at
+      FROM food_meals WHERE id = ${id} OR source_poll_id = ${sourcePollId}
+      ORDER BY (id = ${id}) DESC LIMIT 1`)[0];
+    if (!row) throw new Error('The saved meal could not be found.');
+    return res.status(inserted ? 201 : 200).json({
       id: row.id, name: row.name, sourcePollId: row.source_poll_id, createdAt: row.created_at,
     });
   } catch (error) { return sendError(res, error); }
