@@ -13,6 +13,6 @@
     "@neondatabase/serverless": "^1.2.0"
   },
   "devDependencies": {
-    "vercel": "^53.2.0"
+    "vercel": "^65.11.0"
   }
 }
